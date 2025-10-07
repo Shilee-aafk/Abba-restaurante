@@ -1,0 +1,70 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+<div class="flex justify-between items-center mb-4">
+    <h1>Usuarios</h1>
+    <a href="{% url 'logout' %}" class="button">Cerrar Sesión</a>
+</div>
+
+<h2>Lista de Usuarios</h2>
+<table class="results">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Rol</th>
+            <th>PIN</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for profile in users %}
+        <tr>
+            <td>{{ profile.user.username }}</td>
+            <td>{{ profile.get_role_display }}</td>
+            <td>{{ profile.pin|default:"N/A" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Generar PIN para nuevo usuario</h2>
+<form method="post" class="form-row">
+    {% csrf_token %}
+    <label for="role">Rol:</label>
+    <select name="role" id="role" required class="form-row">
+        <option value="garzon">Garzón</option>
+        <option value="cocinero">Cocinero</option>
+        <option value="admin">Administrador</option>
+        <option value="recepcion">Recepción</option>
+    </select>
+    <button type="submit" class="button">Generar PIN</button>
+</form>
+
+<h3>PINs generados</h3>
+<table class="results">
+    <thead>
+        <tr>
+            <th>PIN</th>
+            <th>Rol</th>
+            <th>Fecha Creación</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pin in pins %}
+        <tr>
+            <td>{{ pin.pin }}</td>
+            <td>{{ pin.get_role_display }}</td>
+            <td>{{ pin.created_at|date:"d/m/Y H:i" }}</td>
+            <td>{{ pin.uses|yesno:"Usado,Disponible" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No hay PINs generados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p>Nota: Para crear/editar usuarios, usar Django admin o implementar formulario.</p>
+{% endblock %}

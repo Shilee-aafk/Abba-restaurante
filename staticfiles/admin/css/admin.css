@@ -1,0 +1,290 @@
+/* Contenido combinado de admin.css y custom_admin.css */
+
+/* Custom styles for Django admin */
+
+/* Change header background */
+#site-name a {
+    color: #fff !important;
+}
+
+#user-tools a {
+    color: #3498db !important;
+}
+
+/* Style for results table */
+.results table th {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+    color: #fff !important;
+}
+
+.results table tr:nth-child(even) {
+    background-color: #f8f9fa !important;
+}
+
+.results table tr:hover {
+    background-color: #e8f4fd !important;
+}
+
+/* Buttons */
+.button, input[type="submit"], input[type="button"], input[type="reset"] {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important;
+    border: none !important;
+    color: #fff !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.3s !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+}
+
+.button:hover, input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
+}
+
+/* Module styles */
+.module h2 {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%) !important;
+    color: #ecf0f1 !important;
+    padding: 10px !important;
+    margin: 0 !important;
+}
+
+.module caption {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+    color: #fff !important;
+    font-weight: bold !important;
+    padding: 10px !important;
+    border-radius: 8px 8px 0 0 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+.module table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    border-radius: 0 0 8px 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05) !important;
+}
+
+.module table th, .module table td {
+    padding: 12px !important;
+    text-align: left !important;
+    border-bottom: 1px solid #ecf0f1 !important;
+}
+
+.module table th {
+    background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%) !important;
+    color: #2c3e50 !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    font-size: 12px !important;
+    letter-spacing: 0.5px !important;
+}
+
+.module table tr:nth-child(even) {
+    background-color: #f8f9fa !important;
+}
+
+.module table tr:nth-child(odd) {
+    background-color: #fff !important;
+}
+
+.module table tr:hover {
+    background-color: #e8f4fd !important;
+    transform: scale(1.01) !important;
+    transition: all 0.2s !important;
+}
+
+.module table a {
+    color: #3498db !important;
+    text-decoration: none !important;
+    padding: 5px 10px !important;
+    border-radius: 4px !important;
+    transition: all 0.3s !important;
+}
+
+.module table a:hover {
+    background-color: #3498db !important;
+    color: #fff !important;
+}
+
+/* Form styles */
+.form-row {
+    background: #f8f9fa !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 8px !important;
+    padding: 15px !important;
+    margin-bottom: 15px !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+}
+
+.form-row label {
+    color: #2c3e50 !important;
+    font-weight: 600 !important;
+    margin-bottom: 5px !important;
+    display: block !important;
+}
+
+.form-row input[type="text"], .form-row input[type="password"], .form-row input[type="email"], .form-row input[type="number"], .form-row select, .form-row textarea {
+    width: 100% !important;
+    padding: 10px !important;
+    border: 2px solid #bdc3c7 !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    transition: border-color 0.3s !important;
+}
+
+.form-row input[type="text"]:focus, .form-row input[type="password"]:focus, .form-row input[type="email"]:focus, .form-row input[type="number"]:focus, .form-row select:focus, .form-row textarea:focus {
+    border-color: #3498db !important;
+    outline: none !important;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3) !important;
+}
+
+.fieldBox {
+    background: #fff !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 8px !important;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05) !important;
+}
+
+.fieldBox h2 {
+    color: #2c3e50 !important;
+    font-size: 18px !important;
+    margin-bottom: 15px !important;
+    border-bottom: 2px solid #3498db !important;
+    padding-bottom: 5px !important;
+}
+
+.submit-row {
+    background: #f8f9fa !important;
+    padding: 20px !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+    margin-top: 30px !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05) !important;
+}
+
+.submit-row input[type="submit"] {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 12px 30px !important;
+    border-radius: 6px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.3s !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+}
+
+.submit-row input[type="submit"]:hover {
+    background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
+}
+
+.deletelink {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s !important;
+}
+
+.deletelink:hover {
+    background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%) !important;
+    transform: translateY(-1px) !important;
+}
+
+.object-tools {
+    background: #f8f9fa !important;
+    padding: 15px !important;
+    border-radius: 8px !important;
+    margin-bottom: 20px !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+}
+
+.object-tools a {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    margin-right: 10px !important;
+    transition: all 0.3s !important;
+}
+
+.object-tools a:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #3498db 100%) !important;
+    transform: translateY(-1px) !important;
+}
+
+.breadcrumbs {
+    background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%) !important;
+    padding: 10px 15px !important;
+    border-radius: 6px !important;
+    margin-bottom: 20px !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+}
+
+.breadcrumbs a {
+    color: #2c3e50 !important;
+    text-decoration: none !important;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline !important;
+}
+
+/* Highlight status */
+.status-pending {
+    background-color: #ffe0b2 !important;
+}
+
+.status-preparing {
+    background-color: #fff3cd !important;
+}
+
+.status-ready {
+    background-color: #c8e6c9 !important;
+}
+
+.status-delivered {
+    background-color: #d1ecf1 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #content {
+        margin: 10px !important;
+    }
+    #content-main {
+        padding: 20px !important;
+    }
+    .module table th, .module table td {
+        padding: 8px !important;
+        font-size: 14px !important;
+    }
+    .form-row {
+        padding: 10px !important;
+    }
+    .fieldBox {
+        padding: 15px !important;
+    }
+    .submit-row {
+        padding: 15px !important;
+    }
+}

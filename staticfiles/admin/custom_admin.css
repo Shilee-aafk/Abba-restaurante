@@ -1,0 +1,378 @@
+/* Custom admin styles to override default Django admin blue */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+#header {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: #ecf0f1;
+  padding: 15px 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+#header a, #header a:visited {
+  color: #ecf0f1;
+  text-decoration: none;
+}
+
+#user-tools {
+  float: right;
+  margin-top: -30px;
+}
+
+#user-tools a, #user-tools a:visited {
+  color: #3498db;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+#user-tools a:hover {
+  background-color: rgba(52, 152, 219, 0.2);
+}
+
+#content {
+  margin: 20px;
+}
+
+#content-main {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  padding: 30px;
+  margin-bottom: 20px;
+  border: 1px solid #e9ecef;
+}
+
+/* Table styles */
+.results {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.results table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.results table th, .results table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.results table th {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.results table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.results table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.results table tr:hover {
+  background-color: #e8f4fd;
+}
+
+.paginator {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.paginator a {
+  color: #3498db;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.paginator a:hover {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.paginator .this-page {
+  background: #3498db;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+/* Module styles */
+.module {
+  margin-bottom: 30px;
+}
+
+.module h2 {
+  color: #2c3e50;
+  font-size: 20px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+}
+
+.module caption {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 8px 8px 0 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.module table {
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.module table th, .module table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.module table th {
+  background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%);
+  color: #2c3e50;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.module table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.module table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.module table tr:hover {
+  background-color: #e8f4fd;
+  transform: scale(1.01);
+  transition: all 0.2s;
+}
+
+.module table a {
+  color: #3498db;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.module table a:hover {
+  background-color: #3498db;
+  color: #fff;
+}
+
+/* Buttons */
+.button, input[type="submit"], input[type="button"], input[type="reset"] {
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.button:hover, input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* Form styles for add/edit pages */
+.form-row {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.form-row label {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-row input[type="text"], .form-row input[type="password"], .form-row input[type="email"], .form-row input[type="number"], .form-row select, .form-row textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #bdc3c7;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.form-row input[type="text"]:focus, .form-row input[type="password"]:focus, .form-row input[type="email"]:focus, .form-row input[type="number"]:focus, .form-row select:focus, .form-row textarea:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+.fieldBox {
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.fieldBox h2 {
+  color: #2c3e50;
+  font-size: 18px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+}
+
+.submit-row {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.submit-row input[type="submit"] {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.submit-row input[type="submit"]:hover {
+  background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.deletelink {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.deletelink:hover {
+  background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+  transform: translateY(-1px);
+}
+
+.object-tools {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.object-tools a {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-right: 10px;
+  transition: all 0.3s;
+}
+
+.object-tools a:hover {
+  background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+  transform: translateY(-1px);
+}
+
+.breadcrumbs {
+  background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%);
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.breadcrumbs a {
+  color: #2c3e50;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #content {
+    margin: 10px;
+  }
+  #content-main {
+    padding: 20px;
+  }
+  .module table th, .module table td {
+    padding: 8px;
+    font-size: 14px;
+  }
+  .form-row {
+    padding: 10px;
+  }
+  .fieldBox {
+    padding: 15px;
+  }
+  .submit-row {
+    padding: 15px;
+  }
+}

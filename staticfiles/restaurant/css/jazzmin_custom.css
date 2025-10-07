@@ -1,0 +1,124 @@
+/*
+ * ===================================================================
+ *  CSS PERSONALIZADO PARA JAZZMIN - VERSIÓN FINAL Y ESTABLE
+ * ===================================================================
+ */
+
+/* --- 1. AJUSTE PARA EL ANCHO DEL MENÚ LATERAL --- */
+.main-sidebar { width: 280px; }
+.content-wrapper, .main-footer, .main-header { margin-left: 280px; }
+.sidebar-collapse .content-wrapper,
+.sidebar-collapse .main-footer,
+.sidebar-collapse .main-header { margin-left: 0; }
+
+/* --- 2. ENSANCHAR EL CONTENIDO PRINCIPAL EN PANTALLAS GRANDES --- */
+@media (min-width: 1200px) {
+    .content { max-width: 1400px !important; }
+}
+
+/*
+ * ===================================================================
+ *  3. AJUSTE DEFINITIVO PARA EL WIDGET DE PERMISOS (CON FLEXBOX)
+ *  Este método es robusto y no rompe el layout.
+ * ===================================================================
+ */
+
+/* Convertimos el contenedor principal en un contenedor Flexbox */
+.selector {
+    display: flex !important;
+    justify-content: space-between !important; /* Distribuye el espacio entre los elementos */
+}
+
+/* Hacemos que las columnas de permisos (izquierda y derecha) crezcan para llenar el espacio */
+.selector-available, .selector-chosen {
+    flex: 1 !important; /* ¡LA CLAVE! Le dice a ambas columnas que ocupen el espacio libre de forma equitativa */
+    display: flex;
+    flex-direction: column; /* Apila los elementos internos (título, filtro, lista) verticalmente */
+}
+
+/* Controlamos la columna central de las flechas */
+.selector .selector-tools {
+    flex: 0 0 auto !important; /* Le decimos que no crezca ni se encoja, que ocupe su espacio natural */
+    margin: 0 15px; /* Le damos un poco de aire a los lados */
+    padding-top: 50px; /* La bajamos un poco para alinearla visualmente */
+}
+
+/* Hacemos que los elementos internos (listas, filtros) usen el 100% del ancho de su nueva columna flexible */
+.selector-available select,
+.selector-chosen select,
+.selector-filter input {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+/* Mantenemos una buena altura para ver más opciones */
+.selector-available select,
+.selector-chosen select {
+    height: 300px !important;
+}
+
+/*
+ * ===================================================================
+ *  6. ¡NUEVO! ARREGLAR LOGO/AVATAR CIRCULAR EN EL MENÚ
+ *  Esto elimina el redondeado forzado del avatar del usuario.
+ * ===================================================================
+ */
+
+/* Seleccionamos la imagen del usuario en el panel lateral (que por defecto es .img-circle) */
+.main-sidebar .user-panel .img-circle {
+    border-radius: 0 !important; /* Reseteamos el radio del borde a 0 para que sea cuadrada */
+}
+
+/*
+ * ===================================================================
+ *  7. ARREGLO DEFINITIVO PARA EL LOGO PRINCIPAL (brand-image)
+ * ===================================================================
+ */
+
+/*
+ * Parte A: Eliminar el redondeado circular forzado.
+ * Seleccionamos el logo por su clase específica 'brand-image' y la clase
+ * 'img-circle' que Jazzmin le añade.
+ */
+.brand-image.img-circle {
+    border-radius: 0 !important; /* Reseteamos el radio del borde para que sea cuadrado */
+}
+
+/*
+ * Parte B: Ajustar tamaño y posición para que encaje perfectamente.
+ * Esto anula los estilos que lo hacían demasiado grande.
+ */
+.brand-image {
+    max-height: 40px !important;  /* Limita la altura del logo a 40px. Ajústalo si lo necesitas. */
+    width: auto !important;       /* El ancho se ajustará automáticamente para no deformarse. */
+    margin-top: -8px !important;  /* Sube un poco el logo para que quede centrado verticalmente. */
+    box-shadow: none !important;  /* Elimina cualquier sombra extra que pueda tener (como 'elevation-3'). */
+}
+
+/*
+ * ===================================================================
+ *  8. ELIMINAR SUBRAYADO DE TODOS LOS ENLACES
+ * ===================================================================
+ */
+a {
+    text-decoration: none !important;
+}
+
+/* Específico para enlaces en tablas */
+.results a,
+.table a {
+    text-decoration: none !important;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .main-sidebar {
+        width: 100%; /* El menú ocupa todo el ancho */
+    }
+
+    .content-wrapper,
+    .main-footer,
+    .main-header {
+        margin-left: 0; /* El contenido principal no tiene margen izquierdo */
+    }
+}

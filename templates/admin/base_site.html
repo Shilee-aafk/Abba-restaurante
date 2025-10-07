@@ -1,0 +1,106 @@
+{% extends "admin/base.html" %}
+
+{% load static %}
+{% block extrastyle %}
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'restaurant/css/admin_custom.css' %}">
+<style>
+  /* Estilos personalizados para un tema gris elegante en el admin de Django */
+
+  body.dashboard {
+    background-color: #f5f5f7;
+    color: #343a40;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  #header, #branding, #site-name, #user-tools {
+    background-color: #343a40;
+    color: #f8f9fa;
+  }
+
+  #branding h1 a, #site-name a, #user-tools a {
+    color: #f8f9fa;
+    text-decoration: none;
+  }
+
+  #user-tools a:hover {
+    color: #adb5bd;
+  }
+
+  #content {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 0.375rem;
+    box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 0.075);
+  }
+
+  .module, .dashboard-module {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0.0625rem 0.125rem rgb(0 0 0 / 0.05);
+  }
+
+  .module h2, .dashboard-module h2 {
+    color: #212529;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .dashboard-module a, .object-tools a, .btn-primary, .submit-row input[type="submit"] {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 500;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  }
+
+  .dashboard-module a:hover, .object-tools a:hover, .btn-primary:hover, .submit-row input[type="submit"]:hover {
+    background-color: #5a6268;
+    border-color: #5a6268;
+    color: #fff;
+  }
+
+  .breadcrumb {
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .breadcrumb a {
+    color: #6c757d;
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  #content h1 {
+    color: #212529;
+    font-weight: 700;
+  }
+
+  .form-row label {
+    color: #495057;
+    font-weight: 600;
+  }
+
+  .help {
+    color: #6c757d;
+  }
+</style>
+{% endblock %}
+
+{% block extrahead %}
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

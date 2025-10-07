@@ -1,0 +1,29 @@
+body {
+    background-color: red !important;
+}
+
+/* Ocultar iconos de lápiz (editar) y más (agregar) en el admin de Django */
+.addlink:before,
+.changelink:before,
+.deletelink:before,
+.viewlink:before {
+    display: none !important;
+}
+
+/* Ocultar iconos en botones de acciones */
+.object-tools a:before,
+.submit-row input[type="submit"]:before {
+    display: none !important;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px !important; /* Ajustar el tamaño de fuente */
+    }
+
+    /* Ajustar el diseño de la barra de navegación */
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+}
