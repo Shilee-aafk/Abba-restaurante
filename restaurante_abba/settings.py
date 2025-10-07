@@ -50,8 +50,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -139,8 +137,6 @@ STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'assets'),
-    os.path.join(BASE_DIR, 'restaurant', 'static'),
     os.path.join(BASE_DIR, 'static'),
 ]
 
@@ -155,62 +151,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/home/'
 LOGOUT_REDIRECT_URL = '/'
 
-# Jazzmin settings
-JAZZMIN_SETTINGS = {
-    "site_title": "Restaurante ABBA Admin",
-    "site_header": "Restaurante ABBA",
-    "site_brand": "Restaurante ABBA",
-    "site_logo": "img/logo.png",
-    "login_logo": "img/logo.png",
-    "login_logo_dark": "img/logo.png",
-    "site_logo_classes": "img-circle",
-    "site_icon": None,
-    "welcome_sign": "Bienvenido al panel de administración de Restaurante ABBA",
-    "copyright": "Restaurante ABBA Ltd",
-    "search_model": ["auth.User", "restaurant.MenuItem"],
-    "user_avatar": None,
-    "topmenu_links": [
-        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
-        {"model": "auth.User"},
-        {"app": "restaurant"},
-    ],
-    "usermenu_links": [
-        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
-        {"model": "auth.user"}
-    ],
-    "show_sidebar": True,
-    "navigation_expanded": True,
-    "hide_apps": [],
-    "hide_models": [],
-    "order_with_respect_to": ["auth", "restaurant"],
-    "custom_links": {
-        "restaurant": [{
-            "name": "Make Messages",
-            "url": "make_messages",
-            "icon": "fas fa-comments",
-            "permissions": ["restaurant.view_menuitem"]
-        }]
-    },
-    "icons": {
-        "auth": "fas fa-users-cog",
-        "auth.user": "fas fa-user",
-        "auth.Group": "fas fa-users",
-        "restaurant.AuditLog": "fas fa-file-alt",
-        "restaurant.MenuItem": "fas fa-utensils",
-        "restaurant.Order": "fas fa-receipt",
-        "restaurant.OrderItem": "fas fa-list-ol",
-        "restaurant.RegistrationPIN": "fas fa-key",
-        "restaurant.Table": "fas fa-chair",
-        "restaurant.UserProfile": "fas fa-id-card",
-    },
-    "default_icon_parents": "fas fa-chevron-circle-right",
-    "default_icon_children": "fas fa-circle",
-    "related_modal_active": False,
-    "custom_css": "restaurant/css/jazzmin_custom.css",
-    "custom_js": None,
-    "use_google_fonts_cdn": True,
-    "show_ui_builder": False,
-    "changeform_format": "horizontal_tabs",
-    "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
-    "language_chooser": False,
-}
+

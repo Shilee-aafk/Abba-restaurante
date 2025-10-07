@@ -21,10 +21,15 @@ body {
     left: 0 !important;
     top: 0 !important;
     height: 100vh !important;
-    z-index: 1030 !important;
+    z-index: 1020 !important;
 }
 
 .content-wrapper, .main-footer, .main-header {
     margin-left: 0 !important;
     padding-left: 280px !important;
+}
+
+/* Fix for jazzmin navbar overlapping sidebar */
+.navbar {
+    z-index: 1030 !important;
 }

@@ -47,13 +47,13 @@ class MenuItem(models.Model):
 class Order(models.Model):
     table = models.ForeignKey(Table, verbose_name="Mesa", on_delete=models.CASCADE)
     waiter = models.ForeignKey(User, verbose_name="Garzón", on_delete=models.CASCADE)
-    created_at = models.DateTimeField("Fecha y Hora", default=timezone.now)
+    created_at = models.DateTimeField("Fecha y Hora", default=timezone.now, db_index=True)
     status = models.CharField("Estado", max_length=20, choices=[
         ('not_taken', 'Pedido sin tomar'),
         ('preparing', 'En preparación'),
         ('ready', 'Listo'),
         ('delivered', 'Entregado'),
-    ], default='not_taken')
+    ], default='not_taken', db_index=True)
     notes = models.TextField("Notas", blank=True)
 
     class Meta:
@@ -117,11 +117,9 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 @receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
+def manage_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.get_or_create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    if hasattr(instance, 'userprofile'):
-        instance.userprofile.save()
+    else:
+        if hasattr(instance, 'userprofile'):
+            instance.userprofile.save()

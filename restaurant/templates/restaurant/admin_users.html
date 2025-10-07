@@ -1,70 +1,141 @@
-{% extends "admin/base_site.html" %}
-{% load static %}
+{% extends "base.html" %}
+{% block title %}Dashboard de Administrador - Restaurante ABBA{% endblock %}
 
 {% block content %}
-<div class="flex justify-between items-center mb-4">
-    <h1>Usuarios</h1>
-    <a href="{% url 'logout' %}" class="button">Cerrar Sesión</a>
+<div class="flex min-h-screen bg-gray-50">
+    <!-- Sidebar -->
+    <div class="w-64 bg-blue-100 text-blue-800 shadow-xl rounded-r-3xl">
+        <div class="p-6">
+            <h2 class="text-2xl font-bold text-center">Dashboard Admin</h2>
+            <p class="text-blue-600 text-sm mt-2 text-center">Restaurante ABBA</p>
+        </div>
+        <nav class="mt-6">
+            <a href="{% url 'admin_users' %}" class="flex items-center py-3 px-6 hover:bg-blue-200 transition-colors duration-200 rounded-l-2xl {% if request.resolver_match.url_name == 'admin_users' %}bg-blue-200 border-r-4 border-blue-600{% endif %}">
+                <i class="fas fa-users mr-3 text-lg"></i>
+                <span class="font-medium">Administrar Usuarios</span>
+            </a>
+            <a href="{% url 'audit_log' %}" class="flex items-center py-3 px-6 hover:bg-blue-200 transition-colors duration-200 rounded-l-2xl {% if request.resolver_match.url_name == 'audit_log' %}bg-blue-200 border-r-4 border-blue-600{% endif %}">
+                <i class="fas fa-history mr-3 text-lg"></i>
+                <span class="font-medium">Registro de Auditoría</span>
+            </a>
+            <a href="{% url 'select_table' %}" class="flex items-center py-3 px-6 hover:bg-blue-200 transition-colors duration-200 rounded-l-2xl {% if request.resolver_match.url_name == 'select_table' %}bg-blue-200 border-r-4 border-blue-600{% endif %}">
+                <i class="fas fa-utensils mr-3 text-lg"></i>
+                <span class="font-medium">Seleccionar Mesa</span>
+                <small class="text-blue-600 ml-auto">(Mesero)</small>
+            </a>
+            <a href="{% url 'kitchen_queue' %}" class="flex items-center py-3 px-6 hover:bg-blue-200 transition-colors duration-200 rounded-l-2xl {% if request.resolver_match.url_name == 'kitchen_queue' %}bg-blue-200 border-r-4 border-blue-600{% endif %}">
+                <i class="fas fa-concierge-bell mr-3 text-lg"></i>
+                <span class="font-medium">Cola de Cocina</span>
+                <small class="text-blue-600 ml-auto">(Cocinero)</small>
+            </a>
+            <a href="{% url 'reception' %}" class="flex items-center py-3 px-6 hover:bg-blue-200 transition-colors duration-200 rounded-l-2xl {% if request.resolver_match.url_name == 'reception' %}bg-blue-200 border-r-4 border-blue-600{% endif %}">
+                <i class="fas fa-cash-register mr-3 text-lg"></i>
+                <span class="font-medium">Recepción</span>
+            </a>
+            {% if user.is_superuser %}
+            <a href="/admin/" class="flex items-center py-3 px-6 hover:bg-blue-200 transition-colors duration-200 rounded-l-2xl">
+                <i class="fas fa-cog mr-3 text-lg"></i>
+                <span class="font-medium">Django Admin</span>
+            </a>
+            {% endif %}
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-8">
+        <div class="mb-8">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Administrar Usuarios</h1>
+            <p class="text-gray-600">Gestiona usuarios, roles y accesos del sistema</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Lista de Usuarios -->
+            <div class="card p-6">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Lista de Usuarios</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full table-auto">
+                        <thead>
+                            <tr class="border-b border-gray-200">
+                                <th class="text-left py-2 px-4 font-medium text-gray-700">Usuario</th>
+                                <th class="text-left py-2 px-4 font-medium text-gray-700">Rol</th>
+                                <th class="text-left py-2 px-4 font-medium text-gray-700">PIN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for profile in users %}
+                            <tr class="border-b border-gray-100">
+                                <td class="py-3 px-4">{{ profile.user.username }}</td>
+                                <td class="py-3 px-4">{{ profile.get_role_display }}</td>
+                                <td class="py-3 px-4">{{ profile.pin|default:"N/A" }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Generar PIN -->
+            <div class="card p-6">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Generar PIN para Nuevo Usuario</h2>
+                <form method="post" class="space-y-4">
+                    {% csrf_token %}
+                    <div>
+                        <label for="role" class="block text-sm font-medium text-gray-700 mb-2">Rol</label>
+                        <select name="role" id="role" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="garzon">Garzón</option>
+                            <option value="cocinero">Cocinero</option>
+                            <option value="admin">Administrador</option>
+                            <option value="recepcion">Recepción</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary w-full py-2 px-4 rounded-md font-medium">
+                        <i class="fas fa-key mr-2"></i>Generar PIN
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- PINs Generados -->
+        <div class="card p-6 mt-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">PINs Generados</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full table-auto">
+                    <thead>
+                        <tr class="border-b border-gray-200">
+                            <th class="text-left py-2 px-4 font-medium text-gray-700">PIN</th>
+                            <th class="text-left py-2 px-4 font-medium text-gray-700">Rol</th>
+                            <th class="text-left py-2 px-4 font-medium text-gray-700">Fecha Creación</th>
+                            <th class="text-left py-2 px-4 font-medium text-gray-700">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pin in pins %}
+                        <tr class="border-b border-gray-100">
+                            <td class="py-3 px-4 font-mono">{{ pin.pin }}</td>
+                            <td class="py-3 px-4">{{ pin.get_role_display }}</td>
+                            <td class="py-3 px-4">{{ pin.created_at|date:"d/m/Y H:i" }}</td>
+                            <td class="py-3 px-4">
+                                <span class="{% if pin.uses %}text-red-600{% else %}text-green-600{% endif %}">
+                                    {{ pin.uses|yesno:"Usado,Disponible" }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="py-8 px-4 text-center text-gray-500">No hay PINs generados.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
+            <p class="text-blue-800">
+                <i class="fas fa-info-circle mr-2"></i>
+                Nota: Para crear/editar usuarios, usar Django admin o implementar formulario.
+            </p>
+        </div>
+    </div>
 </div>
-
-<h2>Lista de Usuarios</h2>
-<table class="results">
-    <thead>
-        <tr>
-            <th>Usuario</th>
-            <th>Rol</th>
-            <th>PIN</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for profile in users %}
-        <tr>
-            <td>{{ profile.user.username }}</td>
-            <td>{{ profile.get_role_display }}</td>
-            <td>{{ profile.pin|default:"N/A" }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-<h2>Generar PIN para nuevo usuario</h2>
-<form method="post" class="form-row">
-    {% csrf_token %}
-    <label for="role">Rol:</label>
-    <select name="role" id="role" required class="form-row">
-        <option value="garzon">Garzón</option>
-        <option value="cocinero">Cocinero</option>
-        <option value="admin">Administrador</option>
-        <option value="recepcion">Recepción</option>
-    </select>
-    <button type="submit" class="button">Generar PIN</button>
-</form>
-
-<h3>PINs generados</h3>
-<table class="results">
-    <thead>
-        <tr>
-            <th>PIN</th>
-            <th>Rol</th>
-            <th>Fecha Creación</th>
-            <th>Estado</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for pin in pins %}
-        <tr>
-            <td>{{ pin.pin }}</td>
-            <td>{{ pin.get_role_display }}</td>
-            <td>{{ pin.created_at|date:"d/m/Y H:i" }}</td>
-            <td>{{ pin.uses|yesno:"Usado,Disponible" }}</td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="4">No hay PINs generados.</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-<p>Nota: Para crear/editar usuarios, usar Django admin o implementar formulario.</p>
 {% endblock %}

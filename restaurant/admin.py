@@ -2,6 +2,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
+from django.shortcuts import render
+from django.utils import timezone
 from .models import MenuItem, Table, Order, OrderItem, UserProfile, RegistrationPIN, AuditLog
 
 @admin.register(MenuItem)
@@ -142,3 +144,24 @@ class AuditLogAdmin(admin.ModelAdmin):
         css = {
             'all': ('restaurant/css/admin_custom.css',)
         }
+
+# Personalizar el dashboard
+original_index = admin.site.index
+
+def custom_index(request, extra_context=None):
+    today = timezone.now().date()
+    user_count = User.objects.count()
+    menu_count = MenuItem.objects.count()
+    order_count = Order.objects.filter(created_at__date=today).count()
+    table_count = Table.objects.count()
+
+    extra_context = extra_context or {}
+    extra_context.update({
+        'user_count': user_count,
+        'menu_count': menu_count,
+        'order_count': order_count,
+        'table_count': table_count,
+    })
+    return original_index(request, extra_context)
+
+admin.site.index = custom_index

@@ -1,134 +1,81 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cola de Cocina - Restaurante ABBA</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <style>
-      /* Minimalista: menos sombras, menos colores, más espacio */
-      body {
-        background: #f9fafb;
-        font-family: 'Inter', sans-serif;
-      }
-      .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 1rem;
-      }
-      .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 2rem;
-        padding: 1rem;
-        background: white;
-        border-radius: 0.75rem;
-        border: 1px solid #e5e7eb;
-      }
-      .header h1 {
-        font-weight: 700;
-        font-size: 1.75rem;
-        color: #111827;
-      }
-      .header p {
-        color: #6b7280;
-        margin-top: 0.25rem;
-      }
-      .logout-button {
-        background: #ef4444;
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        font-weight: 600;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-      .logout-button:hover {
-        background: #dc2626;
-      }
-      .orders-grid {
+{% extends "base.html" %}
+{% block title %}Cola de Cocina - Restaurante ABBA{% endblock %}
+
+{% block extra_head %}
+<style>
+    .orders-grid {
         display: grid;
         grid-template-columns: 1fr;
         gap: 1rem;
-      }
-      @media (min-width: 640px) {
+    }
+    @media (min-width: 640px) {
         .orders-grid {
-          grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 1fr);
         }
-      }
-      @media (min-width: 1024px) {
+    }
+    @media (min-width: 1024px) {
         .orders-grid {
-          grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr);
         }
-      }
-      .order-card {
+    }
+    .order-card {
         background: white;
         border-radius: 0.75rem;
         border: 1px solid #e5e7eb;
         padding: 1rem;
-        transition: transform 0.2s ease;
-      }
-      .order-card:hover {
-        transform: none;
-      }
-      .order-header {
+    }
+    .order-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 1rem;
-      }
-      .order-header h2 {
+    }
+    .order-header h2 {
         font-weight: 600;
         font-size: 1.25rem;
         color: #111827;
         display: flex;
         align-items: center;
         gap: 0.5rem;
-      }
-      .order-header .date {
+    }
+    .order-header .date {
         color: #6b7280;
         font-size: 0.875rem;
         text-align: right;
-      }
-      .status-badge {
+    }
+    .status-badge {
         display: inline-flex;
         align-items: center;
         padding: 0.25rem 0.75rem;
         border-radius: 9999px;
         font-size: 0.875rem;
         font-weight: 500;
-        color: #374151;        margin-bottom: 1rem;
-      }
-      .status-badge.red {
+        margin-bottom: 1rem;
+    }
+    .status-badge.red {
         background: #fee2e2;
         color: #b91c1c;
-      }
-      .status-badge.blue {
+    }
+    .status-badge.blue {
         background: #dbeafe;
         color: #2563eb;
-      }
-      .status-badge.green {
+    }
+    .status-badge.green {
         background: #d1fae5;
         color: #16a34a;
-      }
-      .notes {
+    }
+    .notes {
         background: #fef3c7;
         border-left: 4px solid #fbbf24;
         padding: 0.5rem;
         margin-bottom: 1rem;
         color: #92400e;
         font-size: 0.875rem;
-      }
-      .items-list {
+    }
+    .items-list {
         margin-bottom: 1.5rem;
-      }
-      .item {
+    }
+    .item {
         display: flex;
         justify-content: space-between;
         padding: 0.5rem;
@@ -137,24 +84,20 @@
         margin-bottom: 0.5rem;
         font-size: 0.875rem;
         color: #4b5563;
-      }
-      .item .name {
+    }
+    .item .name {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-      }
-      .item .quantity {
+    }
+    .item .quantity {
         font-weight: 600;
-      }
-      .item .notes-icon {
-        color: #3b82f6;
-        margin-left: 0.25rem;
-      }
-      .actions {
+    }
+    .actions {
         display: flex;
         gap: 0.5rem;
-      }
-      .btn {
+    }
+    .btn {
         flex: 1;
         padding: 0.75rem;
         border-radius: 0.5rem;
@@ -162,32 +105,32 @@
         cursor: pointer;
         border: none;
         transition: background-color 0.3s ease;
-      }
-      .btn-preparing {
+    }
+    .btn-preparing {
         background: #2563eb;
         color: white;
-      }
-      .btn-preparing:hover {
+    }
+    .btn-preparing:hover {
         background: #1d4ed8;
-      }
-      .btn-ready {
+    }
+    .btn-ready {
         background: #16a34a;
         color: white;
-      }
-      .btn-ready:hover {
+    }
+    .btn-ready:hover {
         background: #15803d;
-      }
-      .empty-state {
+    }
+    .empty-state {
         text-align: center;
         padding: 4rem 0;
         color: #9ca3af;
-      }
-      .empty-state i {
+    }
+    .empty-state i {
         font-size: 4rem;
         margin-bottom: 1rem;
-      }
-      /* Modal */
-      #confirmModal {
+    }
+    /* Modal */
+    #confirmModal {
         position: fixed;
         inset: 0;
         background: rgba(0, 0, 0, 0.5);
@@ -195,11 +138,11 @@
         align-items: center;
         justify-content: center;
         z-index: 50;
-      }
-      #confirmModal.hidden {
+    }
+    #confirmModal.hidden {
         display: none;
-      }
-      #confirmModal .modal-content {
+    }
+    #confirmModal .modal-content {
         background: white;
         padding: 1.5rem;
         border-radius: 1rem;
@@ -207,285 +150,272 @@
         width: 90%;
         text-align: center;
         box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-      }
-      #confirmModal .modal-content h2 {
+    }
+    #confirmModal .modal-content h2 {
         font-weight: 700;
         font-size: 1.25rem;
         margin-bottom: 1rem;
-      }
-      #confirmModal .modal-content p {
+    }
+    #confirmModal .modal-content p {
         margin-bottom: 1.5rem;
         color: #374151;
-      }
-      #confirmModal .modal-content .btn {
+    }
+    #confirmModal .modal-content .btn {
         margin: 0 0.25rem;
-      }
-    </style>
-    <script>
-      let currentOrderId = null;
-      let currentStatus = null;
+    }
+</style>
+{% endblock %}
 
-      function updateStatus(button) {
-        currentOrderId = button.dataset.orderId;
-        currentStatus = button.dataset.status;
-        const statusText = currentStatus === 'preparing' ? 'En Preparación' : 'Listo';
-        document.getElementById('confirmMessage').textContent = `¿Confirmar cambio de estado a "${statusText}"?`;
-        document.getElementById('confirmModal').classList.remove('hidden');
-      }
-
-      function confirmUpdate() {
-        document.getElementById('confirmModal').classList.add('hidden');
-        fetch(`/home/update-order-status/${currentOrderId}/`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': document.getElementById('csrf_token').value
-          },
-          body: JSON.stringify({ status: currentStatus })
-        })
-          .then(response => response.json())
-          .then(data => {
-            if (data.success) {
-              location.reload();
-            } else {
-              alert('Error: ' + data.error);
-            }
-          });
-      }
-
-      function cancelUpdate() {
-        document.getElementById('confirmModal').classList.add('hidden');
-      }
-    </script>
-    <script>
-      // Polling function to fetch latest orders and update the list
-      function fetchOrders() {
-        fetch('/home/kitchen-queue-data/')
-          .then(response => response.json())
-          .then(data => {
-            if (data.error) {
-              console.error('Error fetching orders:', data.error);
-              return;
-            }
-            const orders = data.orders;
-            const ordersGrid = document.querySelector('.orders-grid');
-            if (!ordersGrid) return;
-
-            // Clear current orders
-            ordersGrid.innerHTML = '';
-
-            if (orders.length === 0) {
-              ordersGrid.innerHTML = `
-                <div class="empty-state">
-                  <i class="fas fa-inbox"></i>
-                  <h2>No hay pedidos pendientes</h2>
-                  <p>Todos los pedidos han sido procesados.</p>
-                </div>
-              `;
-              return;
-            }
-
-            // Build orders HTML
-            orders.forEach(order => {
-              const orderCard = document.createElement('div');
-              orderCard.className = 'order-card';
-              if (order.status === 'not_taken') {
-                orderCard.classList.add('status-red');
-              } else if (order.status === 'preparing') {
-                orderCard.classList.add('status-blue');
-              } else if (order.status === 'ready') {
-                orderCard.classList.add('status-green');
-              }
-
-              let itemsHtml = '';
-              if (order.items.length === 0) {
-                itemsHtml = '<p>No hay ítems en este pedido.</p>';
-              } else {
-                itemsHtml = '<div class="items-list">';
-                order.items.forEach(item => {
-                  itemsHtml += `
-                    <div class="item">
-                      <div class="name">
-                        <i class="fas fa-utensils"></i>
-                        <div>${item.menu_item_name}</div>
-                        ${item.notes ? `<div class="text-sm text-gray-600 mt-1 ml-6">${item.notes}</div>` : ''}
-                      </div>
-                      <div class="quantity">x${item.quantity}</div>
-                    </div>
-                  `;
-                });
-                itemsHtml += '</div>';
-              }
-
-              orderCard.innerHTML = `
-                <div class="order-header">
-                  <h2>
-                    <i class="fas fa-table"></i> Mesa ${order.table_number}
-                  </h2>
-                  <div class="date">
-                    <div>${order.created_at_date}</div>
-                    <div>${order.created_at_time}</div>
-                  </div>
-                </div>
-                <div class="status-badge ${order.status === 'not_taken' ? 'red' : order.status === 'preparing' ? 'blue' : 'green'}">
-                  <i class="fas fa-circle mr-2"></i> ${order.status_display}
-                </div>
-                ${order.notes ? `<div class="notes"><i class="fas fa-sticky-note mr-2"></i> ${order.notes}</div>` : ''}
-                ${itemsHtml}
-                <div class="actions">
-                  ${order.status === 'not_taken' ? `
-                    <button
-                      data-order-id="${order.id}"
-                      data-status="preparing"
-                      onclick="updateStatus(this)"
-                      class="btn btn-preparing"
-                    >
-                      <i class="fas fa-play mr-2"></i>En Preparación
-                    </button>
-                  ` : order.status === 'preparing' ? `
-                    <button
-                      data-order-id="${order.id}"
-                      data-status="ready"
-                      onclick="updateStatus(this)"
-                      class="btn btn-ready"
-                    >
-                      <i class="fas fa-check mr-2"></i>Listo
-                    </button>
-                  ` : ''}
-                </div>
-              `;
-
-              ordersGrid.appendChild(orderCard);
-            });
-          })
-          .catch(error => {
-            console.error('Error fetching orders:', error);
-          });
-      }
-
-      // Initial fetch
-      fetchOrders();
-
-      // Poll every 10 seconds
-      setInterval(fetchOrders, 10000);
-    </script>
-</head>
-<body class="bg-gray-50 min-h-screen">
-  {% csrf_token %}
-  <input type="hidden" id="csrf_token" value="{{ csrf_token }}" />
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <div>
-        <h1>Cola de Cocina</h1>
-        <p>Pedidos pendientes de preparación</p>
-      </div>
-      <form method="post" action="{% url 'logout' %}" class="inline">
-        {% csrf_token %}
-        <button type="submit" class="logout-button">
-          <i class="fas fa-sign-out-alt mr-2"></i>Cerrar Sesión
-        </button>
-      </form>
+{% block content %}
+<div class="mb-8">
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Cola de Cocina</h1>
+            <p class="text-gray-600 mt-1">Pedidos pendientes de preparación</p>
+        </div>
     </div>
 
     <!-- Orders Grid -->
     <div class="orders-grid">
-      {% for order in orders %}
-      <div class="order-card {% if order.status == 'not_taken' %}status-red{% elif order.status == 'preparing' %}status-blue{% elif order.status == 'ready' %}status-green{% endif %}">
-        <!-- Order Header -->
-        <div class="order-header">
-          <h2>
-            <i class="fas fa-table"></i> Mesa {{ order.table.number }}
-          </h2>
-          <div class="date">
-            <div>{{ order.created_at|date:"d/m/Y" }}</div>
-            <div>{{ order.created_at|time:"H:i" }}</div>
-          </div>
-        </div>
-
-        <!-- Status Badge -->
-        <div class="status-badge {% if order.status == 'not_taken' %}red{% elif order.status == 'preparing' %}blue{% elif order.status == 'ready' %}green{% endif %}">
-          <i class="fas fa-circle mr-2"></i> {{ order.get_status_display }}
-        </div>
-
-        <!-- Notes -->
-        {% if order.notes %}
-        <div class="notes">
-          <i class="fas fa-sticky-note mr-2"></i> {{ order.notes }}
-        </div>
-        {% endif %}
-
-        <!-- Items -->
-          <div class="items-list">
-            {% for item in order.grouped_items %}
-              <div class="item">
-                <div class="name">
-                  <i class="fas fa-utensils"></i>
-                  <div>{{ item.menu_item.name }} x{{ item.quantity }}</div>
-                  {% if item.notes %}
-                  <div class="text-sm text-gray-600 mt-1 ml-6">{{ item.notes }}</div>
-                  {% else %}
-                  <div class="text-sm text-gray-600 mt-1 ml-6">Sin notas</div>
-                  {% endif %}
+        {% for order in orders %}
+        <div class="order-card">
+            <!-- Order Header -->
+            <div class="order-header">
+                <h2>
+                    <i class="fas fa-table"></i> Mesa {{ order.table.number }}
+                </h2>
+                <div class="date">
+                    <div>{{ order.created_at|date:"d/m/Y" }}</div>
+                    <div>{{ order.created_at|time:"H:i" }}</div>
                 </div>
-                <div class="quantity">{{ item.quantity }}</div>
-              </div>
-            {% empty %}
-            <p>No hay ítems en este pedido.</p>
-            {% endfor %}
-          </div>
+            </div>
 
-        <!-- Action Buttons -->
-        <div class="actions">
-          {% if order.status == 'not_taken' %}
-          <button
-            data-order-id="{{ order.id }}"
-            data-status="preparing"
-            onclick="updateStatus(this)"
-            class="btn btn-preparing"
-          >
-            <i class="fas fa-play mr-2"></i>En Preparación
-          </button>
-          {% elif order.status == 'preparing' %}
-          <button
-            data-order-id="{{ order.id }}"
-            data-status="ready"
-            onclick="updateStatus(this)"
-            class="btn btn-ready"
-          >
-            <i class="fas fa-check mr-2"></i>Listo
-          </button>
-          {% endif %}
+            <!-- Status Badge -->
+            <div class="status-badge {% if order.status == 'not_taken' %}red{% elif order.status == 'preparing' %}blue{% elif order.status == 'ready' %}green{% endif %}">
+                <i class="fas fa-circle mr-2"></i> {{ order.get_status_display }}
+            </div>
+
+            <!-- Notes -->
+            {% if order.notes %}
+            <div class="notes">
+                <i class="fas fa-sticky-note mr-2"></i> {{ order.notes }}
+            </div>
+            {% endif %}
+
+            <!-- Items -->
+            <div class="items-list">
+                {% for item in order.grouped_items %}
+                <div class="item">
+                    <div class="name">
+                        <i class="fas fa-utensils"></i>
+                        <div>{{ item.menu_item.name }}</div>
+                        {% if item.notes %}
+                        <div class="text-sm text-gray-600 mt-1 ml-6">{{ item.notes }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="quantity">x{{ item.quantity }}</div>
+                </div>
+                {% empty %}
+                <p>No hay ítems en este pedido.</p>
+                {% endfor %}
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="actions">
+                {% if order.status == 'not_taken' %}
+                <button
+                    data-order-id="{{ order.id }}"
+                    data-status="preparing"
+                    onclick="updateStatus(this)"
+                    class="btn btn-preparing"
+                >
+                    <i class="fas fa-play mr-2"></i>En Preparación
+                </button>
+                {% elif order.status == 'preparing' %}
+                <button
+                    data-order-id="{{ order.id }}"
+                    data-status="ready"
+                    onclick="updateStatus(this)"
+                    class="btn btn-ready"
+                >
+                    <i class="fas fa-check mr-2"></i>Listo
+                </button>
+                {% endif %}
+            </div>
         </div>
-      </div>
-      {% endfor %}
+        {% endfor %}
     </div>
 
     <!-- Empty State -->
     {% if not orders %}
     <div class="empty-state">
-      <i class="fas fa-inbox"></i>
-      <h2>No hay pedidos pendientes</h2>
-      <p>Todos los pedidos han sido procesados.</p>
+        <i class="fas fa-inbox"></i>
+        <h2>No hay pedidos pendientes</h2>
+        <p>Todos los pedidos han sido procesados.</p>
     </div>
     {% endif %}
-  </div>
+</div>
 
-  <!-- Confirmation Modal -->
-  <div id="confirmModal" class="hidden">
+<!-- Confirmation Modal -->
+<div id="confirmModal" class="hidden">
     <div class="modal-content">
-      <i class="fas fa-question-circle text-orange-500 mb-4"></i>
-      <h2>Confirmar Acción</h2>
-      <p id="confirmMessage"></p>
-      <div>
-        <button onclick="confirmUpdate()" class="btn btn-ready">
-          <i class="fas fa-check mr-2"></i>Confirmar
-        </button>
-        <button onclick="cancelUpdate()" class="btn btn-preparing">
-          <i class="fas fa-times mr-2"></i>Cancelar
-        </button>
-      </div>
+        <i class="fas fa-question-circle text-orange-500 mb-4 text-4xl"></i>
+        <h2>Confirmar Acción</h2>
+        <p id="confirmMessage"></p>
+        <div class="flex justify-center gap-4">
+            <button onclick="confirmUpdate()" class="btn btn-ready">
+                <i class="fas fa-check mr-2"></i>Confirmar
+            </button>
+            <button onclick="cancelUpdate()" class="btn btn-preparing">
+                <i class="fas fa-times mr-2"></i>Cancelar
+            </button>
+        </div>
     </div>
-  </div>
-</body>
-</html>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% csrf_token %}
+<input type="hidden" id="csrf_token" value="{{ csrf_token }}" />
+
+<script>
+    let currentOrderId = null;
+    let currentStatus = null;
+
+    function updateStatus(button) {
+        currentOrderId = button.dataset.orderId;
+        currentStatus = button.dataset.status;
+        const statusText = currentStatus === 'preparing' ? 'En Preparación' : 'Listo';
+        document.getElementById('confirmMessage').textContent = `¿Confirmar cambio de estado a "${statusText}"?`;
+        document.getElementById('confirmModal').classList.remove('hidden');
+    }
+
+    function confirmUpdate() {
+        document.getElementById('confirmModal').classList.add('hidden');
+        fetch(`/home/update-order-status/${currentOrderId}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.getElementById('csrf_token').value
+            },
+            body: JSON.stringify({ status: currentStatus })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Error: ' + data.error);
+            }
+        });
+    }
+
+    function cancelUpdate() {
+        document.getElementById('confirmModal').classList.add('hidden');
+    }
+
+    // Polling function to fetch latest orders and update the list
+    function fetchOrders() {
+        fetch('/home/kitchen-queue-data/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error('Error fetching orders:', data.error);
+                    return;
+                }
+                const orders = data.orders;
+                const ordersGrid = document.querySelector('.orders-grid');
+                if (!ordersGrid) return;
+
+                // Clear current orders
+                ordersGrid.innerHTML = '';
+
+                if (orders.length === 0) {
+                    ordersGrid.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <h2>No hay pedidos pendientes</h2>
+                            <p>Todos los pedidos han sido procesados.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Build orders HTML
+                orders.forEach(order => {
+                    const orderCard = document.createElement('div');
+                    orderCard.className = 'order-card';
+
+                    let itemsHtml = '';
+                    if (order.items.length === 0) {
+                        itemsHtml = '<p>No hay ítems en este pedido.</p>';
+                    } else {
+                        itemsHtml = '<div class="items-list">';
+                        order.items.forEach(item => {
+                            itemsHtml += `
+                                <div class="item">
+                                    <div class="name">
+                                        <i class="fas fa-utensils"></i>
+                                        <div>${item.menu_item_name}</div>
+                                        ${item.notes ? `<div class="text-sm text-gray-600 mt-1 ml-6">${item.notes}</div>` : ''}
+                                    </div>
+                                    <div class="quantity">x${item.quantity}</div>
+                                </div>
+                            `;
+                        });
+                        itemsHtml += '</div>';
+                    }
+
+                    orderCard.innerHTML = `
+                        <div class="order-header">
+                            <h2>
+                                <i class="fas fa-table"></i> Mesa ${order.table_number}
+                            </h2>
+                            <div class="date">
+                                <div>${order.created_at_date}</div>
+                                <div>${order.created_at_time}</div>
+                            </div>
+                        </div>
+                        <div class="status-badge ${order.status === 'not_taken' ? 'red' : order.status === 'preparing' ? 'blue' : 'green'}">
+                            <i class="fas fa-circle mr-2"></i> ${order.status_display}
+                        </div>
+                        ${order.notes ? `<div class="notes"><i class="fas fa-sticky-note mr-2"></i> ${order.notes}</div>` : ''}
+                        ${itemsHtml}
+                        <div class="actions">
+                            ${order.status === 'not_taken' ? `
+                                <button
+                                    data-order-id="${order.id}"
+                                    data-status="preparing"
+                                    onclick="updateStatus(this)"
+                                    class="btn btn-preparing"
+                                >
+                                    <i class="fas fa-play mr-2"></i>En Preparación
+                                </button>
+                            ` : order.status === 'preparing' ? `
+                                <button
+                                    data-order-id="${order.id}"
+                                    data-status="ready"
+                                    onclick="updateStatus(this)"
+                                    class="btn btn-ready"
+                                >
+                                    <i class="fas fa-check mr-2"></i>Listo
+                                </button>
+                            ` : ''}
+                        </div>
+                    `;
+
+                    ordersGrid.appendChild(orderCard);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching orders:', error);
+            });
+    }
+
+    // Initial fetch
+    fetchOrders();
+
+    // Poll every 10 seconds
+    setInterval(fetchOrders, 10000);
+</script>
+{% endblock %}

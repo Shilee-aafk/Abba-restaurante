@@ -1,43 +1,45 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Registro - Restaurante ABBA</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Registro de Usuario</h1>
+{% extends "base.html" %}
+{% block title %}Registro - Restaurante ABBA{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto">
+    <div class="card p-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-6 text-center">Registro de Usuario</h1>
+
         {% if messages %}
             {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                <div class="mb-4 p-4 rounded-md {% if message.tags == 'error' %}bg-red-50 border border-red-200 text-red-800{% else %}bg-green-50 border border-green-200 text-green-800{% endif %}">
+                    <i class="fas {% if message.tags == 'error' %}fa-exclamation-triangle{% else %}fa-check-circle{% endif %} mr-2"></i>
                     {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
                 </div>
             {% endfor %}
         {% endif %}
-        <form method="post" novalidate>
+
+        <form method="post" novalidate class="space-y-6">
             {% csrf_token %}
-            <div class="mb-3">
-                <label for="username" class="form-label">Nombre de usuario</label>
-                <input type="text" class="form-control" id="username" name="username" required />
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Nombre de usuario</label>
+                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="username" name="username" required />
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password" required />
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
+                <input type="password" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="password" name="password" required />
             </div>
-            <div class="mb-3">
-                <label for="pin" class="form-label">PIN de Registro</label>
-                <input type="text" class="form-control" id="pin" name="pin" required />
-                <div class="form-text">Introduce el PIN proporcionado para el rol deseado.</div>
+            <div>
+                <label for="pin" class="block text-sm font-medium text-gray-700 mb-2">PIN de Registro</label>
+                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="pin" name="pin" required />
+                <p class="text-sm text-gray-500 mt-1">Introduce el PIN proporcionado para el rol deseado.</p>
             </div>
-            <button type="submit" class="btn btn-primary">Registrar</button>
+            <button type="submit" class="btn-primary w-full py-3 px-4 rounded-md font-medium">
+                <i class="fas fa-user-plus mr-2"></i>Registrar
+            </button>
         </form>
-        <div class="mt-3">
-            <a href="{% url 'login' %}">¿Ya tienes cuenta? Inicia sesión aquí</a>
+
+        <div class="mt-6 text-center">
+            <a href="{% url 'login' %}" class="text-blue-600 hover:text-blue-800">
+                <i class="fas fa-sign-in-alt mr-1"></i>¿Ya tienes cuenta? Inicia sesión aquí
+            </a>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+{% endblock %}

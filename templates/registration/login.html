@@ -1,32 +1,38 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - Restaurante ABBA</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body class="bg-gray-100 d-flex justify-content-center align-items-center vh-100">
-    <div class="bg-white p-4 rounded shadow w-100" style="max-width: 320px;">
-        <h2 class="text-center mb-4">Iniciar Sesión</h2>
+{% extends "base.html" %}
+{% block title %}Iniciar Sesión - Restaurante ABBA{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto">
+    <div class="card p-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-6 text-center">Iniciar Sesión</h1>
+
         {% if form.errors %}
-            <div class="alert alert-danger text-center" role="alert">
+            <div class="mb-4 p-4 bg-red-50 border border-red-200 text-red-800 rounded-md">
+                <i class="fas fa-exclamation-triangle mr-2"></i>
                 Usuario o contraseña incorrectos.
             </div>
         {% endif %}
-        <form method="post" action="">
+
+        <form method="post" action="" class="space-y-6">
             {% csrf_token %}
-            <div class="mb-3">
-                <label for="id_username" class="form-label">Usuario:</label>
-                <input type="text" id="id_username" name="username" class="form-control" required>
+            <div>
+                <label for="id_username" class="block text-sm font-medium text-gray-700 mb-2">Usuario</label>
+                <input type="text" id="id_username" name="username" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required />
             </div>
-            <div class="mb-3">
-                <label for="id_password" class="form-label">Contraseña:</label>
-                <input type="password" id="id_password" name="password" class="form-control" required>
+            <div>
+                <label for="id_password" class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
+                <input type="password" id="id_password" name="password" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required />
             </div>
-            <button type="submit" class="btn btn-success w-100">Iniciar Sesión</button>
+            <button type="submit" class="btn-success w-full py-3 px-4 rounded-md font-medium">
+                <i class="fas fa-sign-in-alt mr-2"></i>Iniciar Sesión
+            </button>
         </form>
-        <p class="mt-3 text-center"><a href="{% url 'register' %}">¿No tienes cuenta? Regístrate aquí</a></p>
+
+        <div class="mt-6 text-center">
+            <a href="{% url 'register' %}" class="text-blue-600 hover:text-blue-800">
+                <i class="fas fa-user-plus mr-1"></i>¿No tienes cuenta? Regístrate aquí
+            </a>
+        </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

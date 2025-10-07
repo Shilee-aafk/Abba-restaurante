@@ -1,0 +1,137 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4"><i class="fas fa-tachometer-alt"></i> Panel de Administración - Restaurante ABBA</h1>
+        </div>
+    </div>
+
+    <div class="row justify-content-start">
+        <!-- Usuarios -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Usuarios</h5>
+                    <p class="card-text">Gestionar usuarios y perfiles.</p>
+                    <a href="{% url 'admin:auth_user_changelist' %}" class="btn btn-primary">
+                        <i class="fas fa-list"></i> Ver Usuarios
+                    </a>
+                    <a href="{% url 'admin:auth_user_add' %}" class="btn btn-success ml-2">
+                        <i class="fas fa-plus"></i> Agregar Usuario
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-utensils fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Menú</h5>
+                    <p class="card-text">Administrar items del menú.</p>
+                    <a href="{% url 'admin:restaurant_menuitem_changelist' %}" class="btn btn-primary">
+                        <i class="fas fa-list"></i> Ver Menú
+                    </a>
+                    <a href="{% url 'admin:restaurant_menuitem_add' %}" class="btn btn-success ml-2">
+                        <i class="fas fa-plus"></i> Agregar Item
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pedidos -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-receipt fa-3x text-warning mb-3"></i>
+                    <h5 class="card-title">Pedidos</h5>
+                    <p class="card-text">Ver y gestionar pedidos.</p>
+                    <a href="{% url 'admin:restaurant_order_changelist' %}" class="btn btn-primary">
+                        <i class="fas fa-list"></i> Ver Pedidos
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mesas -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-chair fa-3x text-info mb-3"></i>
+                    <h5 class="card-title">Mesas</h5>
+                    <p class="card-text">Administrar mesas del restaurante.</p>
+                    <a href="{% url 'admin:restaurant_table_changelist' %}" class="btn btn-primary">
+                        <i class="fas fa-list"></i> Ver Mesas
+                    </a>
+                    <a href="{% url 'admin:restaurant_table_add' %}" class="btn btn-success ml-2">
+                        <i class="fas fa-plus"></i> Agregar Mesa
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Perfiles de Usuario -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-id-card fa-3x text-secondary mb-3"></i>
+                    <h5 class="card-title">Perfiles</h5>
+                    <p class="card-text">Gestionar perfiles de usuario.</p>
+                    <a href="{% url 'admin:restaurant_userprofile_changelist' %}" class="btn btn-primary">
+                        <i class="fas fa-list"></i> Ver Perfiles
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logs de Auditoría -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-file-alt fa-3x text-danger mb-3"></i>
+                    <h5 class="card-title">Auditoría</h5>
+                    <p class="card-text">Ver logs de auditoría.</p>
+                    <a href="{% url 'admin:restaurant_auditlog_changelist' %}" class="btn btn-primary">
+                        <i class="fas fa-list"></i> Ver Logs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estadísticas rápidas -->
+    <div class="row mt-4 justify-content-start">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-chart-bar"></i> Estadísticas Rápidas</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-start">
+                        <div class="col-md-3">
+                            <h3 class="text-primary">{{ user_count|default:0 }}</h3>
+                            <p>Usuarios Totales</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h3 class="text-success">{{ menu_count|default:0 }}</h3>
+                            <p>Items en Menú</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h3 class="text-warning">{{ order_count|default:0 }}</h3>
+                            <p>Pedidos Hoy</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h3 class="text-info">{{ table_count|default:0 }}</h3>
+                            <p>Mesas Disponibles</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
